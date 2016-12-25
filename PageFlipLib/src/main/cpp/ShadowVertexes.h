@@ -73,7 +73,7 @@ public:
         mForward = forward;
     }
 
-    inline void printSummary() {
+    inline void printInfo() {
         LOGV("ShadowVertexes",
              "Capacity: %d, MaxBackward: %d, Forward: %d, Backward: %d",
              mCapacity, mMaxBackward, mForward, mBackward);

@@ -36,8 +36,7 @@ public:
               bool hasSecondPage, GLuint gradientLightId);
 
     //inline
-    inline void set(int meshCount)
-    {
+    inline void set(int meshCount) {
         Vertexes::set(meshCount << 1, 4, true);
     }
 

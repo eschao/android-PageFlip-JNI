@@ -99,9 +99,9 @@ void PageFlip::onSurfaceChanged(int width, int height) {
     mViewRect.set(width, height);
     glViewport(0, 0, width, height);
     mVertexProg.initMatrix(-mViewRect.halfWidth,
-                             mViewRect.halfWidth,
-                             -mViewRect.halfHeight,
-                             mViewRect.halfHeight);
+                           mViewRect.halfWidth,
+                           -mViewRect.halfHeight,
+                           mViewRect.halfHeight);
     computeMaxMeshCount();
     createPages();
 }
@@ -122,13 +122,13 @@ void PageFlip::createPages() {
     if (mPageMode == AUTO_PAGE_MODE &&
         mViewRect.surfaceWidth > mViewRect.surfaceHeight) {
         mPages[FIRST_PAGE] = new Page(mViewRect.left, 0, mViewRect.top,
-                                       mViewRect.bottom);
+                                      mViewRect.bottom);
         mPages[SECOND_PAGE] = new Page(0, mViewRect.right, mViewRect.top,
-                                        mViewRect.bottom);
+                                       mViewRect.bottom);
     }
     else {
         mPages[FIRST_PAGE] = new Page(mViewRect.left, mViewRect.right,
-                                       mViewRect.top, mViewRect.bottom);
+                                      mViewRect.top, mViewRect.bottom);
     }
 }
 
@@ -284,9 +284,9 @@ bool PageFlip::onFingerUp(float x, float y, int duration,
     PointF start(mTouchP);
     PointF end(0, 0);
 
-    // mForward flipping
+    // Forward flipping
     if (mFlipState == FORWARD_FLIP) {
-        // can't going mForward, restore current page
+        // can't going Forward, restore current page
         if (page.isXInRange(x, kWidthOfRatioOfRestoreFlip)) {
             end.x = originP.x;
             mFlipState = RESTORE_FLIP;
@@ -299,9 +299,9 @@ bool PageFlip::onFingerUp(float x, float y, int duration,
         }
         end.y = originP.y;
     }
-    // mBackward flipping
+    // Backward flipping
     else if (mFlipState == BACKWARD_FLIP) {
-        // if not over middle x, change from mBackward to mForward to restore
+        // if not over middle x, change from Backward to mForward to restore
         if (!page.isXInRange(x, 0.5f)) {
             mFlipState = FORWARD_FLIP;
             end.set(diagonalP.x - page.mWidth, originP.y);
@@ -339,7 +339,7 @@ bool PageFlip::onFingerUp(float x, float y, int duration,
 bool PageFlip::canAnimate(float x, float y) {
     return (mFlipState == FORWARD_FLIP &&
             !mPages[FIRST_PAGE]->contains(mViewRect.toOpenGLX(x),
-                                           mViewRect.toOpenGLY(y)));
+                                          mViewRect.toOpenGLY(y)));
 }
 
 void PageFlip::computeScrollPointsForClickingFlip(float x,
@@ -352,7 +352,7 @@ void PageFlip::computeScrollPointsForClickingFlip(float x,
     GLPoint& diagonalP = page.mDiagonalP;
     bool hasSecondPage = mPages[SECOND_PAGE] != NULL;
 
-    // mForward and mBackward flip have different degree
+    // Forward and Backward flip have different degree
     float tanOfForwardAngle = kMaxTanOfForwardFlip;
     float tanOfBackwardAngle = kMaxTanOfBackwardFlip;
     if ((originP.y < 0 && originP.x > 0) ||
@@ -361,7 +361,7 @@ void PageFlip::computeScrollPointsForClickingFlip(float x,
         tanOfBackwardAngle = -tanOfBackwardAngle;
     }
 
-    // mBackward flip
+    // Backward flip
     if (!hasSecondPage &&
         x < diagonalP.x + page.mWidth * mWidthRatioOfClickToFlip &&
         canBackward) {
@@ -371,7 +371,7 @@ void PageFlip::computeScrollPointsForClickingFlip(float x,
         start.set(diagonalP.x, (originP.y + (start.x - originP.x) * mKValue));
         end.set(originP.x - 5, originP.y);
     }
-    // mForward flip
+    // Forward flip
     else if (canForward && page.isXInRange(x, kWidthRatioOfClickToFlip)) {
         mFlipState = FORWARD_FLIP;
         mKValue = tanOfForwardAngle;
@@ -521,9 +521,9 @@ void PageFlip::drawFlipFrame() {
     glUseProgram(mBackOfFoldVertexProg.programRef());
     glActiveTexture(GL_TEXTURE0);
     mBackOfFoldVertexes.draw(mBackOfFoldVertexProg,
-                                 *mPages[FIRST_PAGE],
-                                 mPages[SECOND_PAGE] != NULL,
-                                 mGradientLightTexId);
+                             *mPages[FIRST_PAGE],
+                             mPages[SECOND_PAGE] != NULL,
+                             mGradientLightTexId);
 
     // 2. draw unfold page and front of fold page
     glUseProgram(mVertexProg.programRef());

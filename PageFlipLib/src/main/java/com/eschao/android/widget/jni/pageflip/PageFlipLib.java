@@ -21,8 +21,7 @@ public class PageFlipLib {
         System.loadLibrary("pageflip");
     }
 
-    static OnPageFlipListener mListener = null;
-
+    private static OnPageFlipListener mListener = null;
     public static void setListener(OnPageFlipListener listener) {
         mListener = listener;
     }
@@ -131,4 +130,25 @@ public class PageFlipLib {
         c.drawRect(0, 0, 256, 1, paint);
         return bitmap;
     }
+
+    // Error definition
+    public static final int OK                             = 0;
+    public static final int ERROR                          = OK - 1;
+    public static final int ERR_PAGE_FLIP_UNINIT           = OK - 2;
+    public static final int ERR_NULL_PARAMETER             = OK - 3;
+    public static final int ERR_INVALID_PARAMETER          = OK - 4;
+    public static final int ERR_GL_ERROR                   = OK - 5;
+    public static final int ERR_GL_COMPILE_SHADER          = OK - 6;
+    public static final int ERR_GL_LINK_PROGRAM            = OK - 7;
+    public static final int ERR_GL_CREATE_SHADER_REF       = OK - 8;
+    public static final int ERR_GL_CREATE_PROGRAM_REF      = OK - 9;
+    public static final int ERR_GL_ATTACH_SHADER           = OK - 10;
+    public static final int ERR_GL_ATTACH_FRAGMENT         = OK - 11;
+    public static final int ERR_UNSUPPORT_BITMAP_FORMAT    = OK - 12;
+    public static final int ERR_GET_BITMAP_INFO            = OK - 13;
+    public static final int ERR_GET_BITMAP_DATA            = OK - 14;
+    public static final int ERR_NO_TWO_PAGES               = OK - 15;
+    public static final int ERR_NULL_PAGE                  = OK - 16;
+
+    public static native int getError();
 }

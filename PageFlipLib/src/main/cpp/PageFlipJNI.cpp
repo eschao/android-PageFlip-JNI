@@ -27,6 +27,7 @@ static const char *gClassName   =
         "com/eschao/android/widget/jni/pageflip/PageFlipLib";
 
 static JNINativeMethod gMethodsTable[] = {
+        { "getError", "()I", (void *)JNI_GetError },
         { "init", "()Z", (void *)JNI_InitLib },
         { "release", "()Z", (void *)JNI_ReleaseLib },
         { "enableAutoPage", "(Z)I", (void *)JNI_EnableAutoPage },
@@ -113,6 +114,10 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void *reserved) {
     }
 
     return JNI_VERSION_1_6;
+}
+
+JNIEXPORT jint JNICALL JNI_GetError(JNIEnv* env, jobject obj) {
+    return (jint)gError.code();
 }
 
 JNIEXPORT void JNICALL JNI_InitLib(JNIEnv* env, jobject obj) {
@@ -338,7 +343,7 @@ JNIEXPORT jint JNICALL JNI_GetSurfaceWidth(JNIEnv* env, jobject obj) {
 JNIEXPORT jint JNICALL JNI_GetSurfaceHeight(JNIEnv* env, jobject obj) {
     gError.reset();
     if (gPageFlip) {
-        return (jint) gPageFlip->surfaceHeight();
+        return (jint)gPageFlip->surfaceHeight();
     }
     else {
         LOGE("JNI_GetSurfaceHeight",
@@ -400,7 +405,7 @@ JNIEXPORT jboolean JNICALL JNI_IsLeftPage(JNIEnv* env,
             return JNI_FALSE;
         }
 
-        return page->isLeftPage();
+        return (jboolean)page->isLeftPage();
     }
     else {
         LOGE("JNI_IsLeftPage",
@@ -422,7 +427,7 @@ JNIEXPORT jboolean JNICALL JNI_IsRightPage(JNIEnv* env,
             return JNI_FALSE;
         }
 
-        return page->isRightPage();
+        return (jboolean)page->isRightPage();
     }
     else {
         LOGE("JNI_IsRightPage",
@@ -489,7 +494,7 @@ JNIEXPORT jboolean JNICALL JNI_OnFingerMove(JNIEnv* env,
                                             jboolean can_backward) {
     gError.reset();
     if (gPageFlip) {
-        return (jboolean) gPageFlip->onFingerMove(x, y,
+        return (jboolean)gPageFlip->onFingerMove(x, y,
                                                    can_forward, can_backward);
     }
     else {
@@ -510,8 +515,8 @@ JNIEXPORT jboolean JNICALL JNI_OnFingerUp(JNIEnv* env,
                                           jboolean can_backward) {
     gError.reset();
     if (gPageFlip) {
-        return (jboolean) gPageFlip->onFingerUp(x, y, duration,
-                                                 can_forward, can_backward);
+        return (jboolean)gPageFlip->onFingerUp(x, y, duration,
+                                               can_forward, can_backward);
     }
     else {
         gError.set(Error::ERR_PAGE_FLIP_UNINIT);
@@ -542,7 +547,7 @@ JNIEXPORT jboolean JNICALL JNI_CanAnimate(JNIEnv* env,
                                           jfloat y) {
     gError.reset();
     if (gPageFlip) {
-        return gPageFlip->canAnimate(x, y);
+        return (jboolean)gPageFlip->canAnimate(x, y);
     }
     else {
         gError.set(Error::ERR_PAGE_FLIP_UNINIT);
@@ -556,7 +561,7 @@ JNIEXPORT jboolean JNICALL JNI_CanAnimate(JNIEnv* env,
 JNIEXPORT jboolean JNICALL JNI_IsAnimating(JNIEnv* env, jobject obj) {
     gError.reset();
     if (gPageFlip) {
-        return (jboolean) gPageFlip->isAnimating();
+        return (jboolean)gPageFlip->isAnimating();
     }
     else {
         gError.set(Error::ERR_PAGE_FLIP_UNINIT);
@@ -623,7 +628,7 @@ JNIEXPORT jint JNICALL JNI_GetFlipState(JNIEnv* env, jobject obj) {
 JNIEXPORT jboolean JNICALL JNI_HasFirstPage(JNIEnv* env, jobject obj) {
     gError.reset();
     if (gPageFlip) {
-        return (jboolean) gPageFlip->hasFirstPage();
+        return (jboolean)gPageFlip->hasFirstPage();
     }
     else {
         gError.set(Error::ERR_PAGE_FLIP_UNINIT);
@@ -637,7 +642,7 @@ JNIEXPORT jboolean JNICALL JNI_HasFirstPage(JNIEnv* env, jobject obj) {
 JNIEXPORT jboolean JNICALL JNI_HasSecondPage(JNIEnv* env, jobject obj) {
     gError.reset();
     if (gPageFlip) {
-        return (jboolean) gPageFlip->hasSecondPage();
+        return (jboolean)gPageFlip->hasSecondPage();
     }
     else {
         gError.set(Error::ERR_PAGE_FLIP_UNINIT);
@@ -681,7 +686,7 @@ JNIEXPORT jboolean JNICALL JNI_IsSecondTextureSet(JNIEnv* env,
             return JNI_FALSE;
         }
 
-        return (jboolean) page->textures.isSecondTextureSet();
+        return (jboolean)page->textures.isSecondTextureSet();
     }
     else {
         gError.set(Error::ERR_PAGE_FLIP_UNINIT);
@@ -703,7 +708,7 @@ JNIEXPORT jboolean JNICALL JNI_IsBackTextureSet(JNIEnv* env,
             return JNI_FALSE;
         }
 
-        return (jboolean) page->textures.isBackTextureSet();
+        return (jboolean)page->textures.isBackTextureSet();
     }
     else {
         gError.set(Error::ERR_PAGE_FLIP_UNINIT);

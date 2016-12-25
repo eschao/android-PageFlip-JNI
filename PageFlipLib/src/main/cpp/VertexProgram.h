@@ -25,9 +25,9 @@ class VertexProgram : public GLProgram {
 
 public:
     VertexProgram();
-    ~VertexProgram();
+    virtual ~VertexProgram();
 
-    void clean();
+    virtual void clean();
     virtual int init();
     void initMatrix(float left, float right, float bottom, float top);
 
@@ -49,7 +49,7 @@ public:
     }
 
 protected:
-    void getVarsLocation();
+    virtual void getVarsLocation();
 
 public:
     static float MVMatrix[16];

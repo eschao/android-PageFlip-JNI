@@ -34,23 +34,6 @@ void Textures::setSecondTextureWithFirst() {
     mTextures[FIRST_TEXTURE_ID].isSet = false;
 }
 
-static void printTextures(const char* title, Texture_* t) {
-    LOGV("Textures", "%s: [%d:%d] [%d:%d] [%d:%d]", title,
-         t[0].texId, t[0].isSet, t[1].texId, t[1].isSet,
-         t[2].texId, t[2].isSet);
-}
-
-static void printRecycler(const char* title, TexRecycler_& r) {
-    std::string s;
-    char buf[256];
-    for (int i = 0; i < r.size; ++i) {
-        sprintf(buf, "%d,", r.texIds[i]);
-        s.append(buf);
-    }
-
-    LOGV("Textures", "%s: [%d] [%s]", title, r.size, s.c_str());
-}
-
 void Textures::swapTexturesWith(Textures &rhs) {
     mRecycler.add(mTextures[SECOND_TEXTURE_ID]);
     mTextures[SECOND_TEXTURE_ID] = mTextures[FIRST_TEXTURE_ID];
@@ -280,8 +263,7 @@ void Page::buildVertexesOfPageWhenSlope(Vertexes &frontVertexes,
     // compute xFoldX point
     float half_h = mHeight * 0.5f;
     int index = 0;
-    mXFoldP.set(xFoldP1.x, mOriginP.y, 0,
-                textureX(xFoldP1.x), mOriginP.texY);
+    mXFoldP.set(xFoldP1.x, mOriginP.y, 0, textureX(xFoldP1.x), mOriginP.texY);
     if (isXOutsidePage(xFoldP1.x)) {
         index = 2;
         mXFoldP.x = mDiagonalP.x;
@@ -291,8 +273,7 @@ void Page::buildVertexesOfPageWhenSlope(Vertexes &frontVertexes,
     }
 
     // compute yFoldY point
-    mYFoldP.set(mOriginP.x, yFoldP1.y, 0, mOriginP.texX,
-                textureY(yFoldP1.y));
+    mYFoldP.set(mOriginP.x, yFoldP1.y, 0, mOriginP.texX, textureY(yFoldP1.y));
     if (fabs(yFoldP1.y) > half_h) {
         index++;
         mYFoldP.x = mOriginP.x + kValue * (yFoldP1.y - mDiagonalP.y);

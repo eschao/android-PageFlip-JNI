@@ -85,13 +85,15 @@ public class DoublePagesRender extends PageRender {
             // before drawing, check if back texture of first page is valid
             // Remember: the first page is always the fold page
             if (!PageFlipLib.isBackTextureSet(true)) {
-                drawPage(PageFlipLib.isLeftPage(true) ? mPageNo - 1 : mPageNo + 2);
+                drawPage(PageFlipLib.isLeftPage(true) ? mPageNo - 1 :
+                         mPageNo + 2);
                 PageFlipLib.setBackTexture(true, mBitmap);
             }
 
             // check the second texture of first page is valid.
             if (!PageFlipLib.isSecondTextureSet(true)) {
-                drawPage(PageFlipLib.isLeftPage(true) ? mPageNo - 2 : mPageNo + 3);
+                drawPage(PageFlipLib.isLeftPage(true) ? mPageNo - 2 :
+                         mPageNo + 3);
                 PageFlipLib.setSecondTexture(true, mBitmap);
             }
 

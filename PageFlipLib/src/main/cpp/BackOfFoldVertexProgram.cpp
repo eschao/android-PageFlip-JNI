@@ -51,9 +51,9 @@ static const auto g_fragment_shader =
         "    gl_FragColor = vec4(maskedTexture.rgb * (1.0 - shadow.a) + shadow.rgb, maskedTexture.a);\n"
         "}";
 
-static const char *VAR_TEXTURE_OFFSET = "u_texXOffset";
-static const char *VAR_MASK_COLOR = "u_maskColor";
-static const char *VAR_SHADOW_TEXTURE = "u_shadow";
+static const char *VAR_TEXTURE_OFFSET   = "u_texXOffset";
+static const char *VAR_MASK_COLOR       = "u_maskColor";
+static const char *VAR_SHADOW_TEXTURE   = "u_shadow";
 
 BackOfFoldVertexProgram::BackOfFoldVertexProgram()
         : mShadowLoc(Constant::kGlInValidLocation),

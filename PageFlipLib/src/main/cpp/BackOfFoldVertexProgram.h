@@ -25,10 +25,10 @@ class BackOfFoldVertexProgram : public VertexProgram {
 
 public:
     BackOfFoldVertexProgram();
-    ~BackOfFoldVertexProgram();
+    virtual ~BackOfFoldVertexProgram();
 
-    void clean();
-    int init();
+    virtual void clean();
+    virtual int init();
 
     // inline
     inline GLint shadowLoc() {
@@ -44,7 +44,7 @@ public:
     }
 
 protected:
-    void getVarsLocation();
+    virtual void getVarsLocation();
 
 protected:
     GLint mShadowLoc;

@@ -20,6 +20,7 @@
 #include <jni.h>
 
 extern "C" {
+JNIEXPORT jint JNICALL JNI_GetError(JNIEnv* env, jobject obj);
 JNIEXPORT void JNICALL JNI_InitLib(JNIEnv* env, jobject obj);
 JNIEXPORT void JNICALL JNI_ReleaseLib(JNIEnv* env, jobject obj);
 JNIEXPORT jint JNICALL JNI_EnableAutoPage(JNIEnv* env,

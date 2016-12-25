@@ -25,10 +25,10 @@ class ShadowVertexProgram : public GLProgram {
 
 public:
     ShadowVertexProgram();
-    ~ShadowVertexProgram();
+    virtual ~ShadowVertexProgram();
 
     int init();
-    void clean();
+    virtual void clean();
 
     inline GLint mvpMatrixLoc() {
         return mMVPMatrixLoc;
@@ -43,7 +43,7 @@ public:
     }
 
 protected:
-    void getVarsLocation();
+    virtual void getVarsLocation();
 
 protected:
     GLint mMVPMatrixLoc;

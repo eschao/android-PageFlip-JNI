@@ -41,9 +41,9 @@ static const auto g_fragment_shader =
         "    gl_FragColor = v_texColor;\n"
         "}";
 
-static const char *VAR_MVP_MATRIX = "u_MVPMatrix";
-static const char *VAR_VERTEX_Z = "u_vexZ";
-static const char *VAR_VERTEX_POS = "a_vexPosition";
+static const char *VAR_MVP_MATRIX   = "u_MVPMatrix";
+static const char *VAR_VERTEX_Z     = "u_vexZ";
+static const char *VAR_VERTEX_POS   = "a_vexPosition";
 
 ShadowVertexProgram::ShadowVertexProgram()
         : mMVPMatrixLoc(Constant::kGlInValidLocation),
