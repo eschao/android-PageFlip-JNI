@@ -7,9 +7,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="/Volumes/Data/github/android-PageFlip-JNI" />
-            <option value="/Volumes/Data/github/android-PageFlip-JNI/PageFlipLib" />
-            <option value="/Volumes/Data/github/android-PageFlip-JNI/PageFlipLibSample" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/PageFlipLib" />
+            <option value="$PROJECT_DIR$/PageFlipLibSample" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
